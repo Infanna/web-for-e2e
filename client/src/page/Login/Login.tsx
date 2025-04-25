@@ -37,6 +37,13 @@ const Login = () => {
               <input
                 type="text"
                 className="form-control"
+                style={{
+                  border: "none",
+                  borderBottom: "1px solid #ccc",
+                  borderRadius: "0",
+                  fontSize: "17px",
+                  opacity: "0.8",
+                }}
                 placeholder="Username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
@@ -51,6 +58,13 @@ const Login = () => {
               <input
                 type="password"
                 className="form-control"
+                style={{
+                  border: "none",
+                  borderBottom: "1px solid #ccc",
+                  borderRadius: "0",
+                  fontSize: "17px",
+                  opacity: "0.8",
+                }}
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -60,10 +74,17 @@ const Login = () => {
               className="row"
               style={{
                 minWidth: "250px",
+                marginTop: "50px",
               }}
             >
               <button
-                className="mt-4 p-4 btn btn-success w-300 "
+                className="mt-4 p-4 btn btn-success w-300"
+                style={{
+                  backgroundColor: "#3CDC91",
+                  border: "none",
+                  color: "black",
+                  fontSize: "20px",
+                }}
                 onClick={handleSubmit}
               >
                 Login
