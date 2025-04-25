@@ -1,12 +1,24 @@
 import React, { useState } from "react";
+// import { useNavigate } from "react-router-dom";
+
+const userList: { username: string; password: string } = {
+  username: "admin",
+  password: "admin",
+};
 
 const Login = () => {
+  // const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert(`Username: ${username}\nPassword: ${password}`);
+    if (userList.username === username && userList.password === password) {
+      alert("Login success");
+      // navigate("/products");
+    } else {
+      alert("Login failed");
+    }
   };
 
   return (
@@ -16,31 +28,49 @@ const Login = () => {
           className="container card-body"
           style={{ maxWidth: "25vw", marginTop: "80px", marginBottom: "80px" }}
         >
-          <form onSubmit={handleSubmit}>
-            <div className="col text-center align-items-center">
-              <div className="mb-3 row">
-                <input
-                  type="text"
-                  className="form-control"
-                  placeholder="Username"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                />
-              </div>
-              <div className="mb-3 row">
-                <input
-                  type="password"
-                  className="form-control"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
-              <div className="row">
-                <button className="mt-4 p-4 btn btn-success w-300 ">Login</button>
-              </div>
+          <div className="col text-center align-items-center">
+            <div
+              className="mb-3 row"
+              style={{
+                minWidth: "250px",
+              }}
+            >
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Username"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
             </div>
-          </form>
+            <div
+              className="mb-3 row"
+              style={{
+                minWidth: "250px",
+              }}
+            >
+              <input
+                type="password"
+                className="form-control"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <div
+              className="row"
+              style={{
+                minWidth: "250px",
+              }}
+            >
+              <button
+                className="mt-4 p-4 btn btn-success w-300 "
+                onClick={handleSubmit}
+              >
+                Login
+              </button>
+            </div>
+          </div>
         </div>
         <div className="bg-dark text-white mt-4 p-4 rounded">
           <div className="row">
