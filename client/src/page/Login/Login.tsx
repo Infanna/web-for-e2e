@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const userList: { username: string; password: string } = {
   username: "admin",
@@ -7,15 +7,14 @@ const userList: { username: string; password: string } = {
 };
 
 const Login = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (userList.username === username && userList.password === password) {
-      alert("Login success");
-      // navigate("/products");
+      navigate("/products");
     } else {
       alert("Login failed");
     }
