@@ -1,5 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import { Login } from "../page/Login/Login";
+import { TemplateLayout } from "../layout/tamplate-layout/TamplateLayout";
+import { Products } from "../page/Products/Products";
 
 const AppRouters = createBrowserRouter([
   {
@@ -9,6 +11,10 @@ const AppRouters = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/products",
+    element: <TemplateLayout children={<Products />} />,
   },
 ]);
 
