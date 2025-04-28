@@ -1,9 +1,31 @@
+import { useState } from "react";
 import { products } from "../../shared/constant/products";
-
+interface IProduct {
+  id: number;
+  name: string;
+  dataTestId: string;
+  price: number;
+  description: string;
+  image: string;
+  quantity?: number;
+}
 export const Products = () => {
-  const handleAddToCart = () => {
-    console.log("add");
+  const [isSelected, setIsSelected] = useState(false);
+  const handleAddToCart = (product: IProduct) => {
+    const currentCart = JSON.parse(sessionStorage.getItem("cartItems") || "[]");
+    currentCart.push(product);
+    sessionStorage.setItem("cartItems", JSON.stringify(currentCart));
   };
+
+  const handleRemoveCart = (product: IProduct) => {
+    const currentCart = JSON.parse(sessionStorage.getItem("cartItems") || "[]");
+    const newCart = currentCart.filter(
+      (item: IProduct) => item.id !== product.id
+    );
+    setIsSelected(false);
+    sessionStorage.setItem("cartItems", JSON.stringify(newCart));
+  };
+
   return (
     <div className="container my-3">
       <p className="fs-5" data-testid="page-title">
@@ -40,13 +62,24 @@ export const Products = () => {
                   {product.description}
                 </p>
                 <div className="d-flex justify-content-end">
-                  <button
-                    data-testid="add-cart-button"
-                    className="btn btn-primary mt-3"
-                    onClick={handleAddToCart}
-                  >
-                    Add to Cart
-                  </button>
+                  {!isSelected && (
+                    <button
+                      data-testid="add-cart-button"
+                      className="btn btn-primary mt-3"
+                      onClick={() => handleAddToCart(product)}
+                    >
+                      Add to Cart
+                    </button>
+                  )}
+                  {isSelected && (
+                    <button
+                      data-testid="add-cart-button"
+                      className="btn btn-secondary mt-3"
+                      onClick={() => handleRemoveCart(product)}
+                    >
+                      Remove
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
