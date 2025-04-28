@@ -21,6 +21,11 @@ const CheckoutInformation: React.FC = () => {
     sessionStorage.setItem("checkout-information", JSON.stringify(data));
     // TODO: navigate to next page
   };
+
+  const onCancel = () => {
+    navigate("/cart");
+  };
+
   return (
     <div className="container">
       <form
@@ -52,6 +57,7 @@ const CheckoutInformation: React.FC = () => {
               type="button"
               className="btn btn-light w-100"
               data-testid="cancel-button"
+              onClick={onCancel}
             >
               Cancel
             </button>
