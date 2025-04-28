@@ -48,7 +48,7 @@ const Login = () => {
             >
               <input
                 type="text"
-                className="form-controli input-box"
+                className="form-control input-box"
                 data-testid="username"
                 placeholder="Username"
                 value={username}
