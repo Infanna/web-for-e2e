@@ -17,11 +17,19 @@ const AppRouters = createBrowserRouter([
   },
   {
     path: "/products",
-    element: <TemplateLayout children={<Products />} />,
+    element: (
+      <TemplateLayout>
+        <Products />
+      </TemplateLayout>
+    ),
   },
   {
     path: "/cart",
-    element: <TemplateLayout children={<CartPage />} />,
+    element: (
+      <TemplateLayout>
+        <CartPage />
+      </TemplateLayout>
+    ),
   },
   {
     path: "/summary",
@@ -29,7 +37,11 @@ const AppRouters = createBrowserRouter([
   },
   {
     path: "/checkout-information",
-    element: <TemplateLayout children={<CheckoutInformation />} />,
+    element: (
+      <TemplateLayout>
+        <CheckoutInformation />
+      </TemplateLayout>
+    ),
   },
 ]);
 

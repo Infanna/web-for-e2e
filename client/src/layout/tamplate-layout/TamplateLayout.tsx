@@ -1,12 +1,15 @@
 import { NavBarComponent } from "../../components/nav-bar/NavBarComponent";
 
-export function TemplateLayout({ children }: { children: React.ReactNode }) {
+// Additional props here
+type TemplateLayoutProps = {};
+
+export const TemplateLayout: React.FC<
+  React.PropsWithChildren<TemplateLayoutProps>
+> = ({ children, ...props }) => {
   return (
-    <>
-      <div>
-        <NavBarComponent />
-        {children}
-      </div>
-    </>
+    <div>
+      <NavBarComponent />
+      {children}
+    </div>
   );
-}
+};
