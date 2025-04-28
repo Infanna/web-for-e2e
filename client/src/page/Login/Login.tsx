@@ -49,6 +49,7 @@ const Login = () => {
               <input
                 type="text"
                 className="form-controli input-box"
+                data-testid="username"
                 placeholder="Username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
@@ -63,6 +64,7 @@ const Login = () => {
               <input
                 type="password"
                 className="form-control input-box"
+                data-testid="password"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -77,6 +79,7 @@ const Login = () => {
             >
               <button
                 className="mt-4 p-4 btn btn-success w-300 login-button"
+                data-testid="login-button"
                 onClick={handleSubmit}
               >
                 Login
@@ -89,17 +92,19 @@ const Login = () => {
             <div className="col-md-6">
               <h5>Accepted usernames are:</h5>
               <ul className="list-unstyled">
-                {userList.map((user) => (
-                  <li key={user.username}>{user.username}</li>
+                {userList.map((user, index) => (
+                  <li key={user.username} data-testid={`username-${index}`}>
+                    {user.username}
+                  </li>
                 ))}
               </ul>
             </div>
             <div className="col-md-6">
               <h5>Password for all users:</h5>
               <ul className="list-unstyled">
-                {userList.map((user) => (
-                  <li key={user.password}>{user.password}</li>
-                ))}
+                <li key="secret_sauce" data-testid="password-0">
+                  secret_sauce
+                </li>
               </ul>
             </div>
           </div>
