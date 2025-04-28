@@ -9,11 +9,16 @@ export const NavBarComponent = () => {
 
   return (
     <div className="d-flex justify-content-between align-items-center p-3 w-full border-bottom">
-      <a href="/login" data-testid="logout">
+      <a
+        href="/login"
+        data-testid="logout"
+        className="text-decoration-none text-dark"
+      >
         Logout
       </a>
       <img
         src={odtLogo}
+        data-testid="odt-logo"
         alt="odt-logo"
         className="img-fluid"
         style={{ width: "75px", height: "auto" }}
