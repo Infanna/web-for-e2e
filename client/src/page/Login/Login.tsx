@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.scss";
 import logo from "../../assets/images/ODT_Logo.png";
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 
-const userList: { username: string; password: string }[] = [
+interface IUser {
+  username: string;
+  password: string;
+}
+
+const userList: IUser[] = [
   {
     username: "standard_user",
     password: "secret_sauce",
@@ -25,11 +30,19 @@ const Login = () => {
     return Boolean(isMatch);
   };
 
+  useEffect(() => {
+    const userInfo: IUser = JSON.parse(sessionStorage.getItem("login") || "{}");    
+    if (userInfo.username) {
+      setUsername(userInfo.username);
+    }
+  }, []);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     const isMatch = validateUsernameAndPassword();
     if (isMatch) {
+      sessionStorage.setItem("login", JSON.stringify({ username }));
       navigate("/products");
     } else {
       alert("Login failed");
