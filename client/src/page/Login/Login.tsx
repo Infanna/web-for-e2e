@@ -1,19 +1,31 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./Login.scss";
 
-const userList: { username: string; password: string } = {
-  username: "admin",
-  password: "admin",
-};
+const userList: { username: string; password: string }[] = [
+  {
+    username: "standard_user",
+    password: "secret_sauce",
+  },
+];
 
 const Login = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const validateUsernameAndPassword = () => {
+    const isMatch = userList.find(
+      (user) => user.username === username && user.password === password
+    );
+    return Boolean(isMatch);
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (userList.username === username && userList.password === password) {
+
+    const isMatch = validateUsernameAndPassword();
+    if (isMatch) {
       navigate("/products");
     } else {
       alert("Login failed");
@@ -36,14 +48,7 @@ const Login = () => {
             >
               <input
                 type="text"
-                className="form-control"
-                style={{
-                  border: "none",
-                  borderBottom: "1px solid #ccc",
-                  borderRadius: "0",
-                  fontSize: "17px",
-                  opacity: "0.8",
-                }}
+                className="form-controli input-box"
                 placeholder="Username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
@@ -57,14 +62,7 @@ const Login = () => {
             >
               <input
                 type="password"
-                className="form-control"
-                style={{
-                  border: "none",
-                  borderBottom: "1px solid #ccc",
-                  borderRadius: "0",
-                  fontSize: "17px",
-                  opacity: "0.8",
-                }}
+                className="form-control input-box"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -78,13 +76,7 @@ const Login = () => {
               }}
             >
               <button
-                className="mt-4 p-4 btn btn-success w-300"
-                style={{
-                  backgroundColor: "#3CDC91",
-                  border: "none",
-                  color: "black",
-                  fontSize: "20px",
-                }}
+                className="mt-4 p-4 btn btn-success w-300 login-button"
                 onClick={handleSubmit}
               >
                 Login
@@ -97,18 +89,17 @@ const Login = () => {
             <div className="col-md-6">
               <h5>Accepted usernames are:</h5>
               <ul className="list-unstyled">
-                <li>standard_user</li>
-                <li>locked_out_user</li>
-                <li>problem_user</li>
-                <li>performance_glitch_user</li>
-                <li>error_user</li>
-                <li>visual_user</li>
+                {userList.map((user) => (
+                  <li key={user.username}>{user.username}</li>
+                ))}
               </ul>
             </div>
             <div className="col-md-6">
               <h5>Password for all users:</h5>
               <ul className="list-unstyled">
-                <li>secret_sauce</li>
+                {userList.map((user) => (
+                  <li key={user.password}>{user.password}</li>
+                ))}
               </ul>
             </div>
           </div>
