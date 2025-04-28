@@ -1,6 +1,12 @@
 import { useState } from "react";
+import { useNavigateToPage } from "../../utils/navigate/navigate";
 
 const CartPage = () => {
+  const navigateToPage = useNavigateToPage();
+    const goToProductPage = () => {
+      navigateToPage("/products");
+    };
+
   const [cartItems, setCartItems] = useState([
     {
       id: 1,
@@ -32,24 +38,23 @@ const CartPage = () => {
           key={item.id}
           className="d-flex align-items-start justify-content-between border p-3 rounded mb-3"
         >
-          <div className="d-flex align-items-start gap-3">
-            <input
-              data-testid="quantity-input"
-              type="number"
-              value={item.quantity}
-              min="1"
-              className="form-control w-25"
-              readOnly
-            />
+            <div className="d-flex align-items-start gap-3">
+            <div
+              data-testid="quantity-box"
+              className="d-flex justify-content-center align-items-center border rounded"
+              style={{ height: "44px", width: "55px" }}
+            >
+              {item.quantity}
+            </div>
             <div>
               <div data-testid="product-name" className="fw-bold">
-                {item.name}
+              {item.name}
               </div>
               <div data-testid="description-detail" className="text-muted">
-                {item.description}
+              {item.description}
               </div>
             </div>
-          </div>
+            </div>
           <button
             data-testid="remove-button"
             onClick={() => handleRemove(item.id)}
@@ -62,6 +67,7 @@ const CartPage = () => {
 
       <div className="d-flex justify-content-between mt-4">
         <button
+          onClick={goToProductPage}
           data-testid="continue-shopping-button"
           className="btn btn-outline-primary"
         >
