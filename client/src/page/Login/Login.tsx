@@ -78,7 +78,7 @@ const Login = () => {
               }}
             >
               <button
-                className="mt-4 p-4 btn btn-success w-300 login-button"
+                className="mt-4 p-4 btn btn-success w-300 button-style"
                 data-testid="login-button"
                 onClick={handleSubmit}
               >
