@@ -1,38 +1,15 @@
-import { useState } from "react";
 import { products } from "../../shared/constant/products";
-interface IProduct {
-  id: number;
-  name: string;
-  dataTestId: string;
-  price: number;
-  description: string;
-  image: string;
-  qty?: number;
-}
+import useProducts, { IProduct } from "./Product";
+
 export const Products = () => {
-  const [isSelected, setIsSelected] = useState(false);
-  const handleAddToCart = (product: IProduct) => {
-    const currentCart = JSON.parse(sessionStorage.getItem("cartItems") || "[]");
-    currentCart.push({ ...product, qty: 1 });
-    sessionStorage.setItem("cartItems", JSON.stringify(currentCart));
-  };
-
-  const handleRemoveCart = (product: IProduct) => {
-    const currentCart = JSON.parse(sessionStorage.getItem("cartItems") || "[]");
-    const newCart = currentCart.filter(
-      (item: IProduct) => item.id !== product.id
-    );
-    setIsSelected(false);
-    sessionStorage.setItem("cartItems", JSON.stringify(newCart));
-  };
-
+  const { handleAddToCart, handleRemoveCart, productSelected } = useProducts();
   return (
     <div className="container my-3">
       <p className="fs-5" data-testid="page-title">
         Products
       </p>
       <div className="row">
-        {products.map((product) => (
+        {products.map((product: IProduct) => (
           <div className="col-md-4 mb-4" key={product.id}>
             <div className="card h-100" data-testid={`product-${product.id}`}>
               <img
@@ -62,7 +39,9 @@ export const Products = () => {
                   {product.description}
                 </p>
                 <div className="d-flex justify-content-end">
-                  {!isSelected && (
+                  {!productSelected.find(
+                    (item) => item.id === product.id && item.isSelected
+                  ) && (
                     <button
                       data-testid="add-cart-button"
                       className="btn btn-primary mt-3"
@@ -71,7 +50,9 @@ export const Products = () => {
                       Add to Cart
                     </button>
                   )}
-                  {isSelected && (
+                  {productSelected.find(
+                    (item) => item.id === product.id && item.isSelected
+                  ) && (
                     <button
                       data-testid="add-cart-button"
                       className="btn btn-secondary mt-3"

@@ -13,6 +13,7 @@ export const products = [
     description:
       "High-quality ODT wireless headphones with noise cancellation and long battery life.",
     image: odtHeadphones,
+    isSelected: false,
   },
   {
     id: 2,
@@ -22,6 +23,7 @@ export const products = [
     description:
       "Stay connected and track your fitness goals with the stylish ODT Smartwatch Pro.",
     image: odtSmartwatch,
+    isSelected: false,
   },
   {
     id: 3,
@@ -31,6 +33,7 @@ export const products = [
     description:
       "Precision and speed for gamers — ODT Gaming Mouse with customizable DPI settings.",
     image: odtMouse,
+    isSelected: false,
   },
   {
     id: 4,
@@ -40,6 +43,7 @@ export const products = [
     description:
       "Portable ODT Bluetooth Speaker with crystal-clear sound and deep bass.",
     image: odtSpeaker,
+    isSelected: false,
   },
   {
     id: 5,
@@ -49,6 +53,7 @@ export const products = [
     description:
       "ODT Ultra Laptop combines powerful performance with sleek design for work and play.",
     image: odtLaptop,
+    isSelected: false,
   },
   {
     id: 6,
@@ -58,5 +63,6 @@ export const products = [
     description:
       "Track your steps, heart rate, and sleep patterns with the lightweight ODT Fitness Tracker.",
     image: odtFitnessTracker,
+    isSelected: false,
   },
 ];
