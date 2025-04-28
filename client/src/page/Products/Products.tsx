@@ -7,13 +7,13 @@ interface IProduct {
   price: number;
   description: string;
   image: string;
-  quantity?: number;
+  qty?: number;
 }
 export const Products = () => {
   const [isSelected, setIsSelected] = useState(false);
   const handleAddToCart = (product: IProduct) => {
     const currentCart = JSON.parse(sessionStorage.getItem("cartItems") || "[]");
-    currentCart.push(product);
+    currentCart.push({ ...product, qty: 1 });
     sessionStorage.setItem("cartItems", JSON.stringify(currentCart));
   };
 
