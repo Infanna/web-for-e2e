@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.scss";
 import logo from "../../assets/images/ODT_Logo.png";
+import { FaRegEye } from "react-icons/fa";
+import { FaRegEyeSlash } from "react-icons/fa";
 
 const userList: { username: string; password: string }[] = [
   {
@@ -14,6 +16,7 @@ const Login = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
   const validateUsernameAndPassword = () => {
     const isMatch = userList.find(
@@ -31,6 +34,10 @@ const Login = () => {
     } else {
       alert("Login failed");
     }
+  };
+
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
   };
 
   return (
@@ -61,14 +68,16 @@ const Login = () => {
                 minWidth: "250px",
               }}
             >
-              <input
-                type="text"
-                className="form-control input-box"
-                data-testid="username"
-                placeholder="Username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
+              <div>
+                <input
+                  type="text"
+                  className="form-control input-box"
+                  data-testid="username"
+                  placeholder="Username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+              </div>
             </div>
             <div
               className="mb-3 row"
@@ -76,14 +85,24 @@ const Login = () => {
                 minWidth: "250px",
               }}
             >
-              <input
-                type="password"
-                className="form-control input-box"
-                data-testid="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
+              <div className="col col-12 input-group">
+                <input
+                  type={passwordVisible ? "text" : "password"}
+                  className="form-control input-box"
+                  data-testid="password"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <button
+                  className="btn btn-outline-secondary"
+                  data-testid="toggle-password-button"
+                  type="button"
+                  onClick={togglePasswordVisibility} // Toggle visibility
+                >
+                  {passwordVisible ? <FaRegEye /> : <FaRegEyeSlash />}
+                </button>
+              </div>
             </div>
             <div
               className="row"
