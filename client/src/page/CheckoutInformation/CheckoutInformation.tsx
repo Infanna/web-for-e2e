@@ -30,6 +30,7 @@ const CheckoutInformation: React.FC = () => {
                     className="form-select"
                     aria-label="Default select example"
                     name="title"
+                    data-testid="customer-title"
                     required
                   >
                     <option value="">Select title *</option>
@@ -47,6 +48,7 @@ const CheckoutInformation: React.FC = () => {
                     name="first-name"
                     placeholder="Firstname *"
                     aria-label="Firstname"
+                    data-testid="customer-firstname"
                     required
                   />
                 </div>
@@ -57,6 +59,7 @@ const CheckoutInformation: React.FC = () => {
                     name="lastname"
                     placeholder="Lastname *"
                     aria-label="Firstname"
+                    data-testid="customer-lastname"
                     required
                   />
                 </div>
@@ -72,6 +75,7 @@ const CheckoutInformation: React.FC = () => {
                     name="house-number"
                     placeholder="House number *"
                     aria-label="House number"
+                    data-testid="customer-house-number"
                     required
                   />
                 </div>
@@ -82,6 +86,7 @@ const CheckoutInformation: React.FC = () => {
                     name="street"
                     placeholder="Street"
                     aria-label="Street"
+                    data-testid="customer-street"
                   />
                 </div>
                 <div className="col">
@@ -91,6 +96,7 @@ const CheckoutInformation: React.FC = () => {
                     name="sub-district"
                     placeholder="Sub disctrict *"
                     aria-label="Sub disctrict"
+                    data-testid="customer-sub-district"
                     required
                   />
                 </div>
@@ -103,6 +109,7 @@ const CheckoutInformation: React.FC = () => {
                     name="district"
                     placeholder="District *"
                     aria-label="District"
+                    data-testid="customer-district"
                     required
                   />
                 </div>
@@ -114,6 +121,7 @@ const CheckoutInformation: React.FC = () => {
                     name="province"
                     placeholder="Province *"
                     aria-label="Province"
+                    data-testid="customer-province"
                     required
                   />
                 </div>
@@ -125,6 +133,7 @@ const CheckoutInformation: React.FC = () => {
                     name="postal-code"
                     placeholder="Postalcode *"
                     aria-label="Postalcode"
+                    data-testid="customer-postalcode"
                     required
                   />
                 </div>
@@ -134,13 +143,21 @@ const CheckoutInformation: React.FC = () => {
         </div>
         <div className="row">
           <div className="col-2">
-            <button type="button" className="btn btn-light w-100">
+            <button
+              type="button"
+              className="btn btn-light w-100"
+              data-testid="cancel-button"
+            >
               Cancel
             </button>
           </div>
           <div className="col-8"></div>
           <div className="col-2">
-            <button type="submit" className="btn btn-primary w-100">
+            <button
+              type="submit"
+              className="btn btn-primary w-100"
+              data-testid="continue-button"
+            >
               Continue
             </button>
           </div>
