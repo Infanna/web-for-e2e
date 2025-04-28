@@ -6,6 +6,9 @@ const CartPage = () => {
   const goToProductPage = () => {
     navigateToPage("/products");
   };
+  const goToSummaryPage = () => {
+    navigateToPage("/checkout-information");
+  };
 
   interface CartItem {
     id: number;
@@ -100,7 +103,10 @@ const CartPage = () => {
         >
           Continue Shopping
         </button>
-        <button data-testid="checkout-button" className="btn btn-primary">
+        <button
+        onClick={goToSummaryPage}
+        data-testid="checkout-button"
+        className="btn btn-primary" >
           Checkout
         </button>
       </div>
