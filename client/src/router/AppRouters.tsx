@@ -4,6 +4,7 @@ import { Products } from "../page/Products/Products";
 import Login from "../page/Login/Login";
 import CartPage from "../page/Cart/CartPage";
 import Summary from "../page/Summary/Summary";
+import CheckoutInformation from "../page/CheckoutInformation/CheckoutInformation";
 
 const AppRouters = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const AppRouters = createBrowserRouter([
   {
     path: "/summary",
     element: <Summary />,
+  },
+  {
+    path: "/checkout-information",
+    element: <TemplateLayout children={<CheckoutInformation />} />,
   },
 ]);
 
