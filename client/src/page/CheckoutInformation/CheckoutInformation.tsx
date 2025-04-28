@@ -1,4 +1,8 @@
+import { useNavigate } from "react-router-dom";
+
 const CheckoutInformation: React.FC = () => {
+  const naviagate = useNavigate();
+
   const formSubmit = (form: React.FormEvent<HTMLFormElement>) => {
     form.preventDefault();
     form.currentTarget.classList.add("was-validated");
@@ -6,13 +10,15 @@ const CheckoutInformation: React.FC = () => {
       return;
     }
     const formdata = new FormData(form.currentTarget);
-    // TODO: This need to send or store somewhere
-    const _data = formdata
+    const data = formdata
       .entries()
       .reduce((acc: Record<string, string>, [key, value]) => {
         acc[key] = value.toString() || "-";
         return acc;
       }, {});
+
+    sessionStorage.setItem("checkout-information", JSON.stringify(data));
+    // TODO: navigate to next page
   };
   return (
     <div className="container">
