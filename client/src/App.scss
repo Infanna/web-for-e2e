@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono&display=swap');
+
+html, body, #root {
+  font-family: DM Mono,"sans-serif";
+}
+
 .form-control.input-box {
   border: none;
   border-bottom: 1px solid #ccc;
