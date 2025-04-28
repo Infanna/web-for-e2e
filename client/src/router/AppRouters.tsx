@@ -3,6 +3,7 @@ import { TemplateLayout } from "../layout/tamplate-layout/TamplateLayout";
 import { Products } from "../page/Products/Products";
 import Login from "../page/Login/Login";
 import CartPage from "../page/Cart/CartPage";
+import Summary from "../page/Summary/Summary";
 
 const AppRouters = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const AppRouters = createBrowserRouter([
   {
     path: "/cart",
     element: <TemplateLayout children={<CartPage />} />,
+  },
+  {
+    path: "/summary",
+    element: <Summary />,
   },
 ]);
 
