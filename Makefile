@@ -1,5 +1,5 @@
 deploy:
-	cd client && vercel --prod
+	cd client && make deploy
 
 preview:
-	cd client && vercel
+	cd client && make preview
