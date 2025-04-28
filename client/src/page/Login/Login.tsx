@@ -5,7 +5,7 @@ import logo from "../../assets/images/ODT_Logo.png";
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
 import { IUser } from "../../shared/interface/user.interface";
-import { User } from "../../shared/model/user.model";
+import { userList } from "../../shared/constant/user";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ const Login = () => {
   }, []);
 
   const validateUsernameAndPassword = () => {
-    const isMatch = User.list.find(
+    const isMatch = userList.find(
       (user) => user.username === username && user.password === password
     );
     return Boolean(isMatch);
@@ -130,7 +130,7 @@ const Login = () => {
             <div className="col-md-6">
               <h5>Accepted usernames are:</h5>
               <ul className="list-unstyled">
-                {User.list.map((user, index) => (
+                {userList.map((user, index) => (
                   <li key={user.username} data-testid={`username-${index}`}>
                     {user.username}
                   </li>
