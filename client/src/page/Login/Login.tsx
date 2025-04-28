@@ -4,18 +4,8 @@ import "./Login.scss";
 import logo from "../../assets/images/ODT_Logo.png";
 import { FaRegEye } from "react-icons/fa";
 import { FaRegEyeSlash } from "react-icons/fa";
-
-interface IUser {
-  username: string;
-  password: string;
-}
-
-const userList: IUser[] = [
-  {
-    username: "standard_user",
-    password: "secret_sauce",
-  },
-];
+import { IUser } from "../../shared/interface/user.interface";
+import { User } from "../../shared/model/user.model";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -23,19 +13,19 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
 
-  const validateUsernameAndPassword = () => {
-    const isMatch = userList.find(
-      (user) => user.username === username && user.password === password
-    );
-    return Boolean(isMatch);
-  };
-
   useEffect(() => {
-    const userInfo: IUser = JSON.parse(sessionStorage.getItem("login") || "{}");    
+    const userInfo: IUser = JSON.parse(sessionStorage.getItem("login") || "{}");
     if (userInfo.username) {
       setUsername(userInfo.username);
     }
   }, []);
+
+  const validateUsernameAndPassword = () => {
+    const isMatch = User.list.find(
+      (user) => user.username === username && user.password === password
+    );
+    return Boolean(isMatch);
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -140,7 +130,7 @@ const Login = () => {
             <div className="col-md-6">
               <h5>Accepted usernames are:</h5>
               <ul className="list-unstyled">
-                {userList.map((user, index) => (
+                {User.list.map((user, index) => (
                   <li key={user.username} data-testid={`username-${index}`}>
                     {user.username}
                   </li>
