@@ -2,9 +2,17 @@ const CheckoutInformation: React.FC = () => {
   const formSubmit = (form: React.FormEvent<HTMLFormElement>) => {
     form.preventDefault();
     form.currentTarget.classList.add("was-validated");
-  };
-  const action = (formdata: FormData) => {
-    console.log(Array.from(formdata.keys()));
+    if (!form.currentTarget.checkValidity()) {
+      return;
+    }
+    const formdata = new FormData(form.currentTarget);
+    // TODO: This need to send or store somewhere
+    const _data = formdata
+      .entries()
+      .reduce((acc: Record<string, string>, [key, value]) => {
+        acc[key] = value.toString() || "-";
+        return acc;
+      }, {});
   };
   return (
     <div className="container">
@@ -13,7 +21,6 @@ const CheckoutInformation: React.FC = () => {
         style={{ gridTemplateRows: "auto 1fr auto", height: "90vh" }}
         noValidate
         onSubmit={formSubmit}
-        action={action}
       >
         <div className="row">
           <h4> Checkout information </h4>
@@ -45,7 +52,7 @@ const CheckoutInformation: React.FC = () => {
                   <input
                     className="form-control"
                     type="text"
-                    name="first-name"
+                    name="firstname"
                     placeholder="Firstname *"
                     aria-label="Firstname"
                     data-testid="customer-firstname"
@@ -72,7 +79,7 @@ const CheckoutInformation: React.FC = () => {
                   <input
                     className="form-control"
                     type="text"
-                    name="house-number"
+                    name="houseNumber"
                     placeholder="House number *"
                     aria-label="House number"
                     data-testid="customer-house-number"
@@ -93,7 +100,7 @@ const CheckoutInformation: React.FC = () => {
                   <input
                     className="form-control"
                     type="text"
-                    name="sub-district"
+                    name="subDistrict"
                     placeholder="Sub disctrict *"
                     aria-label="Sub disctrict"
                     data-testid="customer-sub-district"
@@ -130,7 +137,7 @@ const CheckoutInformation: React.FC = () => {
                   <input
                     className="form-control"
                     type="text"
-                    name="postal-code"
+                    name="postalCode"
                     placeholder="Postalcode *"
                     aria-label="Postalcode"
                     data-testid="customer-postalcode"
