@@ -17,10 +17,14 @@ const CartPage = () => {
 
   return (
     <div className="container py-4 bg-white">
-      <h1 className="mb-4">Your Cart</h1>
+      <h1 data-testid="page-title" className="mb-4">
+        Your Cart
+      </h1>
       <div className="d-flex justify-content-start mb-3 gap-3">
-        <div>QTY</div>
-        <div className="flex-grow-1">Description</div>
+        <div data-testid="quantity-title">QTY</div>
+        <div data-testid="description-title" className="flex-grow-1">
+          Description
+        </div>
       </div>
 
       {cartItems.map((item) => (
@@ -30,6 +34,7 @@ const CartPage = () => {
         >
           <div className="d-flex align-items-start gap-3">
             <input
+              data-testid="quantity-input"
               type="number"
               value={item.quantity}
               min="1"
@@ -37,11 +42,16 @@ const CartPage = () => {
               readOnly
             />
             <div>
-              <div className="fw-bold">{item.name}</div>
-              <div className="text-muted">{item.description}</div>
+              <div data-testid="product-name" className="fw-bold">
+                {item.name}
+              </div>
+              <div data-testid="description-detail" className="text-muted">
+                {item.description}
+              </div>
             </div>
           </div>
           <button
+            data-testid="remove-button"
             onClick={() => handleRemove(item.id)}
             className="btn btn-outline-danger"
           >
@@ -51,8 +61,15 @@ const CartPage = () => {
       ))}
 
       <div className="d-flex justify-content-between mt-4">
-        <button className="btn btn-outline-primary">Continue Shopping</button>
-        <button className="btn btn-primary">Checkout</button>
+        <button
+          data-testid="continue-shopping-button"
+          className="btn btn-outline-primary"
+        >
+          Continue Shopping
+        </button>
+        <button data-testid="checkout-button" className="btn btn-primary">
+          Checkout
+        </button>
       </div>
     </div>
   );
