@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.scss";
+import logo from "../../assets/images/ODT_Logo.png";
 
 const userList: { username: string; password: string }[] = [
   {
@@ -33,7 +34,21 @@ const Login = () => {
   };
 
   return (
-    <div className="container py-5">
+    <div className="container my-5">
+      <div className="row text-center">
+        <div className="col">
+          <img
+            style={{
+              maxWidth: "200px",
+              height: "auto",
+              padding: "20px",
+              margin: "15px 0 30px 0",
+            }}
+            src={logo}
+            alt="Logo"
+          />
+        </div>
+      </div>
       <div className="card shadow-sm mx-auto" style={{ maxWidth: "200vw" }}>
         <div
           className="container card-body"
@@ -78,7 +93,7 @@ const Login = () => {
               }}
             >
               <button
-                className="mt-4 p-4 btn btn-success w-300 button-style"
+                className="mt-4 p-4 btn w-300 button-style"
                 data-testid="login-button"
                 onClick={handleSubmit}
               >

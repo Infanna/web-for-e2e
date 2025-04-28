@@ -1,7 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=DM+Mono&display=swap");
 
-html, body, #root {
-  font-family: DM Mono,"sans-serif";
+html,
+body,
+#root {
+  font-family: DM Mono, "sans-serif";
 }
 
 .form-control.input-box {
@@ -12,9 +14,24 @@ html, body, #root {
   opacity: 0.8;
 }
 
+.form-control.input-box:focus {
+  border: none;
+  border-bottom: 1px solid #ccc;
+  border-radius: 0;
+  font-size: 17px;
+  opacity: 1;
+  padding: 15px;
+  background-color: rgba(128, 128, 128, 0.1)
+}
+
 .btn.button-style {
-  background-color: #3cdc91;
+  background-color: #085ed6;
   border: none;
   color: black;
   font-size: 20px;
+}
+
+.btn.button-style:hover {
+  background-color: #006aff;
+  color: white;
 }
