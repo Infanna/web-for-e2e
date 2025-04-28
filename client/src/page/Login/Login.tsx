@@ -47,10 +47,10 @@ const Login = () => {
           <img
             data-testid="logo"
             style={{
-              maxWidth: "200px",
+              maxWidth: "160px",
               height: "auto",
               padding: "20px",
-              margin: "15px 0 30px 0",
+              marginBottom: "20px",
             }}
             src={logo}
             alt="Logo"
@@ -122,7 +122,7 @@ const Login = () => {
             </div>
           </div>
         </div>
-        <div className="bg-dark text-white mt-4 p-4 rounded">
+        <div className="bg-dark text-white p-4 rounded">
           <div className="row">
             <div className="col-md-6">
               <h5>Accepted usernames are:</h5>
