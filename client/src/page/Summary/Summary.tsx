@@ -13,18 +13,23 @@ const Summary = () => {
       <div className="row text-center">
         <div
           className="col col-12"
+          data-testid="icon-success"
           style={{ color: "#4DE09A", fontSize: "120px" }}
         >
           <IoMdCheckmarkCircleOutline />
         </div>
-        <div className="col col-12 mt-4" style={{ fontSize: "50px" }}>
+        <div
+          className="col col-12 mt-4"
+          data-testid="text-title"
+          style={{ fontSize: "50px" }}
+        >
           Thank you for your order!
         </div>
-        <div className="col col-12 mt-3">
-          <div>
+        <div className="col col-12 mt-3" data-testid="text-detail">
+          <div data-testid="text-detail-0">
             Your order has been dispatched, and will arrive just as fast as the
           </div>
-          <div>pony can get there!</div>
+          <div data-testid="text-detail-1">pony can get there!</div>
         </div>
         <div className="col col-12 mt-5">
           <button
