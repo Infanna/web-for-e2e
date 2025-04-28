@@ -45,6 +45,7 @@ const Login = () => {
       <div className="row text-center">
         <div className="col">
           <img
+            data-testid="logo"
             style={{
               maxWidth: "200px",
               height: "auto",
