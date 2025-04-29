@@ -19,8 +19,9 @@ const CheckoutInformation: React.FC = () => {
       }, {});
 
     sessionStorage.setItem("checkout-information", JSON.stringify(data));
-	// navigate to summary for now to complete to flow
-	navigate("/summary")
+    sessionStorage.removeItem("cartItems");
+    // navigate to summary for now to complete to flow
+    navigate("/summary");
   };
 
   const onCancel = () => {
