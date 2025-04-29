@@ -11,9 +11,9 @@ export const NavBarComponent = () => {
   };
 
   const clearSessionStorage = () => {
-    const loginInfo = localStorage.getItem("login");
-    localStorage.clear();
-    localStorage.setItem("login", loginInfo ?? "");
+    const loginInfo = sessionStorage.getItem("login");
+    sessionStorage.clear(); 
+    sessionStorage.setItem("login", loginInfo ?? "");
   };
 
   return (

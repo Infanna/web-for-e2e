@@ -4,6 +4,7 @@ interface CartContextType {
   cartItems: number;
   addCount: () => void;
   removeCount: () => void;
+  setCartCountToZero: () => void;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -23,8 +24,14 @@ export function CartProvider({ children }: CartProviderProps) {
     setCartItems((prev) => prev - 1);
   };
 
+  const setCartCountToZero = () => {
+    setCartItems(0);
+  };
+
   return (
-    <CartContext.Provider value={{ cartItems, addCount, removeCount }}>
+    <CartContext.Provider
+      value={{ cartItems, addCount, removeCount, setCartCountToZero }}
+    >
       {children}
     </CartContext.Provider>
   );
