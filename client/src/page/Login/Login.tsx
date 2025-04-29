@@ -7,6 +7,10 @@ import { FaRegEyeSlash } from "react-icons/fa";
 import { IUser } from "../../shared/interface/user.interface";
 import { userList } from "../../shared/constant/user";
 
+const timeout = (delay: number) => {
+  return new Promise((res) => setTimeout(res, delay));
+};
+
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -14,6 +18,7 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const userInfo: IUser = JSON.parse(sessionStorage.getItem("login") || "{}");
@@ -29,9 +34,20 @@ const Login = () => {
     return Boolean(isMatch);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const loadingTimer = async () => {
+    setLoading(true);
+    await timeout(Math.random() * 1000);
+    setLoading(false);
+  };
 
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!username || !password) {
+      alert("Please enter username and password");
+      return;
+    }
+
+    await loadingTimer();
     const isMatch = validateUsernameAndPassword();
     if (isMatch) {
       sessionStorage.setItem("token", "token");
@@ -123,7 +139,17 @@ const Login = () => {
                 data-testid="login-button"
                 onClick={handleSubmit}
               >
-                Login
+                {!loading && <span>Login</span>}
+                {loading && (
+                  <div>
+                    <span
+                      className="spinner-border spinner-border-sm"
+                      role="status"
+                      aria-hidden="true"
+                    ></span>
+                    <span className="sr-only"> Loading...</span>
+                  </div>
+                )}
               </button>
             </div>
           </div>
