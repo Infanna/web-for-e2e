@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./Login.scss";
 import logo from "../../assets/images/ODT_Logo.png";
 import { FaRegEye } from "react-icons/fa";
@@ -9,6 +9,8 @@ import { userList } from "../../shared/constant/user";
 
 const Login = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/products";
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -34,7 +36,7 @@ const Login = () => {
     if (isMatch) {
       sessionStorage.setItem("token", "token");
       sessionStorage.setItem("login", JSON.stringify({ username }));
-      navigate("/products");
+      navigate(from);
     } else {
       alert("Login failed");
     }
