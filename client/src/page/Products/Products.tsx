@@ -1,6 +1,8 @@
+import { createContext } from "react";
 import { products } from "../../shared/constant/products";
 import useProducts, { IProduct } from "./Product";
 
+export const CountCartContext = createContext(0);
 export const Products = () => {
   const { handleAddToCart, handleRemoveCart, productSelected } = useProducts();
   return (

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useCart } from "../../components/cart-provider/CartProvider";
 export interface IProduct {
   id: number;
   name: string;
@@ -21,6 +22,8 @@ export default function useProducts() {
       isSelected: false,
     },
   ]);
+
+  const { addCount, removeCount } = useCart();
   const handleAddToCart = (product: IProduct) => {
     const currentCart = JSON.parse(sessionStorage.getItem("cartItems") || "[]");
     if (
@@ -29,6 +32,7 @@ export default function useProducts() {
     ) {
       currentCart.push({ ...product, qty: 1, isSelected: true });
       setProductSelected(currentCart);
+      addCount();
       sessionStorage.setItem("cartItems", JSON.stringify(currentCart));
     }
   };
@@ -39,6 +43,7 @@ export default function useProducts() {
       (item: IProduct) => item.id !== product.id
     );
     setProductSelected(newCart);
+    removeCount();
     sessionStorage.setItem("cartItems", JSON.stringify(newCart));
   };
 

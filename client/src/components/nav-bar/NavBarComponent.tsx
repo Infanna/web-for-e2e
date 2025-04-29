@@ -1,10 +1,17 @@
 import { IoCartSharp } from "react-icons/io5";
 import { useNavigateToPage } from "../../utils/navigate/navigate";
 import odtLogo from "../../assets/images/ODT_Logo.png";
+import { useCart } from "../cart-provider/CartProvider";
+
 export const NavBarComponent = () => {
   const navigateToPage = useNavigateToPage();
+  const { cartItems } = useCart();
   const goToCart = () => {
     navigateToPage("/cart");
+  };
+
+  const clearSessionStorage = () => {
+    sessionStorage.clear();
   };
 
   return (
@@ -12,7 +19,9 @@ export const NavBarComponent = () => {
       <a
         href="/login"
         data-testid="logout"
-        className="text-decoration-none text-dark"
+        className="text-decoration-none text-dark border border-primary p-2 rounded-pill"
+        style={{ cursor: "pointer" }}
+        onClick={clearSessionStorage}
       >
         Logout
       </a>
@@ -23,11 +32,22 @@ export const NavBarComponent = () => {
         className="img-fluid"
         style={{ width: "75px", height: "auto" }}
       />
-      <IoCartSharp
-        data-testid="icon-cart"
-        className="fs-4"
-        onClick={goToCart}
-      />
+      <div className="position-relative" style={{ cursor: "pointer" }}>
+        <IoCartSharp
+          data-testid="icon-cart"
+          className="fs-2"
+          onClick={goToCart}
+        />
+        {cartItems > 0 && (
+          <div
+            data-testid="count-cart"
+            className="d-flex justify-content-between align-items-center p-1 position-absolute bg-primary text-white top-0 start-100 translate-middle rounded-circle fs-8"
+            style={{ width: "16px", height: "16px" }}
+          >
+            {cartItems}
+          </div>
+        )}
+      </div>
     </div>
   );
 };

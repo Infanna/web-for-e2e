@@ -1,6 +1,6 @@
+import { CartProvider } from "../../components/cart-provider/CartProvider";
 import { NavBarComponent } from "../../components/nav-bar/NavBarComponent";
 
-// Additional props here
 type TemplateLayoutProps = {};
 
 export const TemplateLayout: React.FC<
@@ -8,8 +8,10 @@ export const TemplateLayout: React.FC<
 > = ({ children, ...props }) => {
   return (
     <div>
-      <NavBarComponent />
-      {children}
+      <CartProvider>
+        <NavBarComponent />
+        {children}
+      </CartProvider>
     </div>
   );
 };
