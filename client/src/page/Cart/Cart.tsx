@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigateToPage } from "../../utils/navigate/navigate";
 import Checkout from "../Checkout/Checkout";
 
-const CartPage: React.FC = () => {
+const Cart: React.FC = () => {
   const navigateToPage = useNavigateToPage();
 
   const goToProductPage = () => {
@@ -119,15 +119,15 @@ const CartPage: React.FC = () => {
             onClick={goToCheckoutInformationPage}
             data-testid="checkout-button"
             className="btn btn-primary"
+            disabled={cartItems.length === 0}
           >
             Checkout
           </button>
         </div>
       )}
-
       {showCheckout && <Checkout />}
     </div>
   );
 };
 
-export default CartPage;
+export default Cart;
