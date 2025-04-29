@@ -1,10 +1,13 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigateToPage } from "../../utils/navigate/navigate";
 import { AddressForm, NameForm } from "./CheckoutForm";
 import { useCart } from "../../components/cart-provider/CartProvider";
 
 const CheckoutInformation: React.FC = () => {
-  const navigate = useNavigate();
-  const { setCartCountToZero } = useCart();
+  const navigateToPage = useNavigateToPage();
+  const goToCheckoutPage = () => {
+    sessionStorage.setItem("showCheckout", "true");
+    navigateToPage("/checkout");
+  };
 
   const formSubmit = (form: React.FormEvent<HTMLFormElement>) => {
     form.preventDefault();
@@ -21,18 +24,11 @@ const CheckoutInformation: React.FC = () => {
       }, {});
 
     sessionStorage.setItem("checkout-information", JSON.stringify(data));
-    clearCart();
-    // navigate to summary for now to complete to flow
-    navigate("/summary");
-  };
-
-  const clearCart = () => {
-    sessionStorage.removeItem("cartItems");
-    setCartCountToZero();
+    goToCheckoutPage();
   };
 
   const onCancel = () => {
-    navigate("/cart");
+    navigateToPage("/cart");
   };
 
   return (

@@ -2,7 +2,7 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 import { TemplateLayout } from "../layout/tamplate-layout/TamplateLayout";
 import { Products } from "../page/Products/Products";
 import Login from "../page/Login/Login";
-import CartPage from "../page/Cart/CartPage";
+import CartPage from "../page/Cart/Cart";
 import Summary from "../page/Summary/Summary";
 import CheckoutInformation from "../page/CheckoutInformation/CheckoutInformation";
 import { JSX } from "react";
@@ -42,6 +42,10 @@ const AppRouters = createBrowserRouter([
         </TemplateLayout>
       </AuthGuard>
     ),
+  },
+  {
+    path: "/checkout",
+    element: <TemplateLayout children={<CartPage />} />,
   },
   {
     path: "/summary",
