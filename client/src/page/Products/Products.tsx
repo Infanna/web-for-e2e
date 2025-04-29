@@ -5,7 +5,7 @@ import { IUser } from "../../shared/interface/user.interface";
 
 export const CountCartContext = createContext(0);
 export const Products = () => {
-  const [productList, setProductList] = useState<IProduct[]>(products);
+  const [productList, setProductList] = useState<IProduct[]>([]);
   const { handleAddToCart, handleRemoveCart, productSelected } = useProducts();
 
   useEffect(() => {
