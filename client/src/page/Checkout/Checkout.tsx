@@ -49,17 +49,17 @@ const Checkout: React.FC = () => {
   return (
     <div className="container py-4 bg-white">
       <h4>Payment Information:</h4>
-      <div>OddsCard #{Math.floor(10000 + Math.random() * 90000)}</div>
+      <div data-testid="payment-info">OddsCard #{Math.floor(10000 + Math.random() * 90000)}</div>
       <h4 className="pt-2">Shipping Information:</h4>
-      <ul>
+      <ul data-testid="shipping-info">
         {cartItems.map((item, index) => (
-          <li key={index}>{item.name}</li>
+          <li key={index} data-testid={`cart-item-${index}`}>{item.name}</li>
         ))}
       </ul>
       <h4 className="pt-2">Price Total</h4>
-      <div>Item total: ${itemTotal.toFixed(2)}</div>
-      <div>Tax: ${tax.toFixed(2)}</div>
-      <div>Total: ${totalPrice.toFixed(2)}</div>
+      <div data-testid="item-total">Item total: ${itemTotal.toFixed(2)}</div>
+      <div data-testid="tax">Tax: ${tax.toFixed(2)}</div>
+      <div data-testid="total-price">Total: ${totalPrice.toFixed(2)}</div>
       <div className="row pt-3">
         <div className="col-2">
           <button

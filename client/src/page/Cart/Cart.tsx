@@ -74,6 +74,7 @@ const Cart: React.FC = () => {
 
           {cartItems.map((item) => (
             <div
+              data-testid="cart-item"
               key={item.id}
               className="d-flex align-items-start justify-content-between border p-3 rounded mb-3"
             >
@@ -94,13 +95,15 @@ const Cart: React.FC = () => {
                   </div>
                 </div>
               </div>
-              {showCheckout === true ? null : (<button
-                data-testid="remove-button"
-                onClick={() => handleRemove(item.id)}
-                className="btn btn-outline-danger"
-              >
-                Remove
-              </button>)}
+              {showCheckout === true ? null : (
+                <button
+                  data-testid="remove-button"
+                  onClick={() => handleRemove(item.id)}
+                  className="btn btn-outline-danger"
+                >
+                  Remove
+                </button>
+              )}
             </div>
           ))}
         </>
