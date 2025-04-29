@@ -110,6 +110,7 @@ const CartPage = () => {
           onClick={goToCheckoutInformationPage}
           data-testid="checkout-button"
           className="btn btn-primary"
+          disabled={cartItems.length === 0}
         >
           Checkout
         </button>
