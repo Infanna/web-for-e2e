@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigateToPage } from "../../utils/navigate/navigate";
+import { useCart } from "../../components/cart-provider/CartProvider";
 
 const CartPage = () => {
   const navigateToPage = useNavigateToPage();
+  const { removeCount } = useCart();
   const goToProductPage = () => {
     navigateToPage("/products");
   };
@@ -37,6 +39,7 @@ const CartPage = () => {
   const handleRemove = (id: number) => {
     const updatedCartItems = cartItems.filter((item) => item.id !== id);
     setCartItems(updatedCartItems);
+    removeCount();
     sessionStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
   };
 
@@ -104,9 +107,10 @@ const CartPage = () => {
           Continue Shopping
         </button>
         <button
-        onClick={goToCheckoutInformationPage}
-        data-testid="checkout-button"
-        className="btn btn-primary" >
+          onClick={goToCheckoutInformationPage}
+          data-testid="checkout-button"
+          className="btn btn-primary"
+        >
           Checkout
         </button>
       </div>

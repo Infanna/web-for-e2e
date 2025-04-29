@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useCart } from "../../components/cart-provider/CartProvider";
 export interface IProduct {
   id: number;
@@ -10,36 +10,43 @@ export interface IProduct {
   qty?: number;
   isSelected: boolean;
 }
+
 export default function useProducts() {
-  const [productSelected, setProductSelected] = useState<IProduct[]>([
-    {
-      id: 0,
-      name: "",
-      dataTestId: "",
-      price: 0,
-      description: "",
-      image: "",
-      isSelected: false,
-    },
-  ]);
+  const [productSelected, setProductSelected] = useState<IProduct[]>(() => {
+    const storedCartItems = sessionStorage.getItem("cartItems");
+    if (storedCartItems) {
+      return JSON.parse(storedCartItems);
+    }
+    return [];
+  });
 
   const { addCount, removeCount } = useCart();
+
+  useEffect(() => {
+    const storedCartItems = sessionStorage.getItem("cartItems");
+    if (storedCartItems) {
+      setProductSelected(JSON.parse(storedCartItems));
+    }
+  }, []);
+
+  const checkCart = useMemo(() => {
+    return productSelected;
+  }, [productSelected]);
+
   const handleAddToCart = (product: IProduct) => {
-    const currentCart = JSON.parse(sessionStorage.getItem("cartItems") || "[]");
     if (
-      currentCart.length === 0 ||
-      currentCart.find((item: IProduct) => item.id !== product.id)
+      checkCart.length === 0 ||
+      checkCart.find((item: IProduct) => item.id !== product.id)
     ) {
-      currentCart.push({ ...product, qty: 1, isSelected: true });
-      setProductSelected(currentCart);
+      checkCart.push({ ...product, qty: 1, isSelected: true });
+      setProductSelected(checkCart);
       addCount();
-      sessionStorage.setItem("cartItems", JSON.stringify(currentCart));
+      sessionStorage.setItem("cartItems", JSON.stringify(checkCart));
     }
   };
 
   const handleRemoveCart = (product: IProduct) => {
-    const currentCart = JSON.parse(sessionStorage.getItem("cartItems") || "[]");
-    const newCart = currentCart.filter(
+    const newCart = checkCart.filter(
       (item: IProduct) => item.id !== product.id
     );
     setProductSelected(newCart);
@@ -52,5 +59,6 @@ export default function useProducts() {
     setProductSelected,
     handleAddToCart,
     handleRemoveCart,
+    checkCart,
   };
 }

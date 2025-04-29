@@ -5,6 +5,7 @@ import useProducts, { IProduct } from "./Product";
 export const CountCartContext = createContext(0);
 export const Products = () => {
   const { handleAddToCart, handleRemoveCart, productSelected } = useProducts();
+
   return (
     <div className="container my-3">
       <p className="fs-5" data-testid="page-title">
