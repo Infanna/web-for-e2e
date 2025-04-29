@@ -1,15 +1,23 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import { TemplateLayout } from "../layout/tamplate-layout/TamplateLayout";
 import { Products } from "../page/Products/Products";
 import Login from "../page/Login/Login";
 import CartPage from "../page/Cart/CartPage";
 import Summary from "../page/Summary/Summary";
 import CheckoutInformation from "../page/CheckoutInformation/CheckoutInformation";
+import { JSX } from "react";
+
+const AuthGuard = ({ children }: { children: JSX.Element }) => {
+  return children;
+  // const token = sessionStorage.getItem("token");
+
+  // return !token ? <Login /> : children;
+};
 
 const AppRouters = createBrowserRouter([
   {
     path: "/",
-    element: <Login />,
+    element: <Navigate to="/products" />,
   },
   {
     path: "/login",
@@ -18,29 +26,41 @@ const AppRouters = createBrowserRouter([
   {
     path: "/products",
     element: (
-      <TemplateLayout>
-        <Products />
-      </TemplateLayout>
+      <AuthGuard>
+        <TemplateLayout>
+          <Products />
+        </TemplateLayout>
+      </AuthGuard>
     ),
   },
   {
     path: "/cart",
     element: (
-      <TemplateLayout>
-        <CartPage />
-      </TemplateLayout>
+      <AuthGuard>
+        <TemplateLayout>
+          <CartPage />
+        </TemplateLayout>
+      </AuthGuard>
     ),
   },
   {
     path: "/summary",
-    element: <Summary />,
+    element: (
+      <AuthGuard>
+        <TemplateLayout>
+          <Summary />,
+        </TemplateLayout>
+      </AuthGuard>
+    ),
   },
   {
     path: "/checkout-information",
     element: (
-      <TemplateLayout>
-        <CheckoutInformation />
-      </TemplateLayout>
+      <AuthGuard>
+        <TemplateLayout>
+          <CheckoutInformation />
+        </TemplateLayout>
+      </AuthGuard>
     ),
   },
 ]);

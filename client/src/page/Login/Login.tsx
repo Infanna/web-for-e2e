@@ -32,6 +32,7 @@ const Login = () => {
 
     const isMatch = validateUsernameAndPassword();
     if (isMatch) {
+      sessionStorage.setItem("token", "token");
       sessionStorage.setItem("login", JSON.stringify({ username }));
       navigate("/products");
     } else {
