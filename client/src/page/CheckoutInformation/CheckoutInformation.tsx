@@ -1,6 +1,5 @@
 import { useNavigateToPage } from "../../utils/navigate/navigate";
 import { AddressForm, NameForm } from "./CheckoutForm";
-import { useCart } from "../../components/cart-provider/CartProvider";
 
 const CheckoutInformation: React.FC = () => {
   const navigateToPage = useNavigateToPage();
