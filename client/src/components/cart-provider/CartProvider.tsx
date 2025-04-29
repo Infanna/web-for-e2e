@@ -1,4 +1,10 @@
-import { createContext, useContext, useState, ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  useEffect,
+} from "react";
 
 interface CartContextType {
   cartItems: number;
@@ -15,6 +21,13 @@ interface CartProviderProps {
 
 export function CartProvider({ children }: CartProviderProps) {
   const [cartItems, setCartItems] = useState<number>(0);
+
+  useEffect(() => {
+    const storedCartItems = sessionStorage.getItem("cartItems");
+    if (storedCartItems) {
+      setCartItems(JSON.parse(storedCartItems).length);
+    }
+  }, []);
 
   const addCount = () => {
     setCartItems((prev) => prev + 1);
