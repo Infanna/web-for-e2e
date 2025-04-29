@@ -1,10 +1,25 @@
-import { createContext } from "react";
+import { createContext, useEffect, useState } from "react";
 import { products } from "../../shared/constant/products";
 import useProducts, { IProduct } from "./Product";
+import { IUser } from "../../shared/interface/user.interface";
 
 export const CountCartContext = createContext(0);
 export const Products = () => {
+  const [productList, setProductList] = useState<IProduct[]>(products);
   const { handleAddToCart, handleRemoveCart, productSelected } = useProducts();
+
+  useEffect(() => {
+    const userInfo: IUser = JSON.parse(sessionStorage.getItem("login") || "{}");
+
+    switch (userInfo.username) {
+      case "out_of_stock_user":
+        setProductList([]);
+        break;
+      default:
+        setProductList(products);
+        break;
+    }
+  }, []);
 
   return (
     <div className="container my-3">
@@ -12,7 +27,7 @@ export const Products = () => {
         Products
       </p>
       <div className="row">
-        {products.map((product: IProduct) => (
+        {productList.map((product: IProduct) => (
           <div className="col-md-4 mb-4" key={product.id}>
             <div className="card h-100" data-testid={`product-${product.id}`}>
               <img
@@ -69,6 +84,11 @@ export const Products = () => {
             </div>
           </div>
         ))}
+        {productList.length === 0 && (
+          <p className="fs-5" data-testid="page-title">
+            Out of Stock
+          </p>
+        )}
       </div>
     </div>
   );
