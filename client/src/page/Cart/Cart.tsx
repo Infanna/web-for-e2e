@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigateToPage } from "../../utils/navigate/navigate";
 import Checkout from "../Checkout/Checkout";
+import { useCart } from "../../components/cart-provider/CartProvider";
 
 const Cart: React.FC = () => {
   const navigateToPage = useNavigateToPage();
@@ -21,6 +22,7 @@ const Cart: React.FC = () => {
 
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [showCheckout, setShowCheckout] = useState<boolean>(false);
+  const {  removeCount } = useCart();
 
   useEffect(() => {
     try {
@@ -48,6 +50,7 @@ const Cart: React.FC = () => {
   const handleRemove = (id: number) => {
     const updatedCartItems = cartItems.filter((item) => item.id !== id);
     setCartItems(updatedCartItems);
+    removeCount();
     sessionStorage.setItem("cartItems", JSON.stringify(updatedCartItems));
   };
 
