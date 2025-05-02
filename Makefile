@@ -1,5 +1,5 @@
 deploy:
-	cd client && make deploy
+	make deploy
 
 preview:
-	cd client && make preview
+	make preview
