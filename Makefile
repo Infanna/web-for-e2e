@@ -1,5 +1,2 @@
 deploy:
-	make deploy
-
-preview:
-	make preview
+	vercel --prod
