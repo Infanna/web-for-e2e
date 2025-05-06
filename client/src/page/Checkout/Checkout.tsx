@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigateToPage } from "../../utils/navigate/navigate";
 import { useCart } from "../../components/cart-provider/CartProvider";
+import { CustomerInformation } from "../../shared/interface/customer.interface";
 
 const Checkout: React.FC = () => {
   const [cartItems, setCartItems] = useState<any[]>([]);
@@ -8,6 +9,17 @@ const Checkout: React.FC = () => {
   const [tax, setTax] = useState<number>(0);
   const [totalPrice, setTotalPrice] = useState<number>(0);
   const navigateToPage = useNavigateToPage();
+  const [customer, setCustomer] = useState<CustomerInformation>({
+    title: "",
+    firstname: "",
+    lastname: "",
+    houseNumber: "",
+    street: "",
+    subDistrict: "",
+    district: "",
+    province: "",
+    postalCode: "",
+  });
 
   const goToSummaryPage = () => {
     clearCart();
@@ -24,6 +36,14 @@ const Checkout: React.FC = () => {
     sessionStorage.removeItem("cartItems");
     sessionStorage.setItem("showCheckout", "false");
     setCartCountToZero();
+  };
+
+  const getCustomerInFo = () => {
+    const storedCustomerInfo = sessionStorage.getItem("checkout-information");
+    if (storedCustomerInfo) {
+      const customerInfo = JSON.parse(storedCustomerInfo);
+      setCustomer(customerInfo);
+    }
   };
 
   useEffect(() => {
@@ -43,17 +63,30 @@ const Checkout: React.FC = () => {
       setItemTotal(total);
       setTax(calculatedTax);
       setTotalPrice(calculatedTotalPrice);
+      getCustomerInFo();
     }
   }, []);
 
   return (
     <div className="container py-4 bg-white">
+      <h4>Customer Information:</h4>
+      <div data-testid="customer-info">
+        <p>
+          {customer.title} {customer.firstname} {customer.lastname}{" "}
+          {customer.houseNumber} {customer.street} {customer.subDistrict}{" "}
+          {customer.district} {customer.province} {customer.postalCode}
+        </p>
+      </div>
       <h4>Payment Information:</h4>
-      <div data-testid="payment-info">OddsCard #{Math.floor(10000 + Math.random() * 90000)}</div>
+      <div data-testid="payment-info">
+        OddsCard #{Math.floor(10000 + Math.random() * 90000)}
+      </div>
       <h4 className="pt-2">Shipping Information:</h4>
       <ul data-testid="shipping-info">
         {cartItems.map((item, index) => (
-          <li key={index} data-testid={`cart-item-${index}`}>{item.name}</li>
+          <li key={index} data-testid={`cart-item-${index}`}>
+            {item.name}
+          </li>
         ))}
       </ul>
       <h4 className="pt-2">Price Total</h4>
